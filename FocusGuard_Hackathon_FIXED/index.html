@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FocusGuard — Webcam Focus Monitor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <h1>FocusGuard</h1>
+        <p>Real-time webcam attention monitor</p>
+      </div>
+      <div class="status-pill" id="systemStatus">OFF</div>
+    </header>
+
+    <section class="setup card" id="setupCard">
+      <label for="taskInput">Assigned work</label>
+      <div class="task-row">
+        <input id="taskInput" type="text" maxlength="120" value="Complete the assigned coding task" />
+        <button id="startBtn" class="primary">Start monitoring</button>
+      </div>
+      <p class="hint">Camera frames are processed on-device in your browser. The prototype does not upload webcam video.</p>
+    </section>
+
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="video-card card">
+        <div class="video-wrap">
+          <video id="webcam" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="alarm-overlay" id="alarmOverlay" hidden>
+            <div class="alarm-box">
+              <strong>FOCUS ALERT</strong>
+              <span id="alarmReason">Look back at your work</span>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="alarmTestBtn">Test alarm</button>
+          <button id="pauseBtn">Pause</button>
+          <button id="stopBtn" class="danger">Stop</button>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="card score-card">
+          <div class="metric-title">Attention score</div>
+          <div class="score" id="score">—</div>
+          <div class="bar"><div id="scoreBar"></div></div>
+          <div class="state" id="stateText">Calibrating…</div>
+        </div>
+
+        <div class="card task-card">
+          <div class="metric-title">Assigned work</div>
+          <div id="taskDisplay" class="task-display"></div>
+        </div>
+
+        <div class="card metrics-card">
+          <div class="metric-row"><span>Face detected</span><strong id="faceMetric">—</strong></div>
+          <div class="metric-row"><span>Head direction</span><strong id="headMetric">—</strong></div>
+          <div class="metric-row"><span>Eye direction</span><strong id="eyeMetric">—</strong></div>
+          <div class="metric-row"><span>Phone detected</span><strong id="phoneMetric">—</strong></div>
+          <div class="metric-row"><span>Distraction streak</span><strong id="streakMetric">0.0s</strong></div>
+          <div class="metric-row"><span>Total alerts</span><strong id="alertsMetric">0</strong></div>
+        </div>
+
+        <div class="card event-card">
+          <div class="metric-title">Event log</div>
+          <div id="eventLog" class="event-log"></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>Hackathon prototype • visual attention only • not a disciplinary or biometric decision system</footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
